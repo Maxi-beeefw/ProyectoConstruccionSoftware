@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Pc
+ * @Grupo E
  */
 public class CtrlCliente implements ActionListener {
 
@@ -19,7 +19,6 @@ public class CtrlCliente implements ActionListener {
     private Cliente mod;
     private ConsultasCliente modC;
     private frmRegistrarClientes frm;
-    private frmListarClientes frmL;
     private frmEliminarCliente frmE;
     private frmModificarCliente frmM;
     private frmBuscarCliente frmB;
@@ -27,11 +26,10 @@ public class CtrlCliente implements ActionListener {
 
     
     //metodo constructor
-    public CtrlCliente(Cliente mod, ConsultasCliente modC, frmRegistrarClientes frm, frmListarClientes frmL, frmEliminarCliente frmE, frmModificarCliente frmM, frmBuscarCliente frmB) {
+    public CtrlCliente(Cliente mod, ConsultasCliente modC, frmRegistrarClientes frm, frmEliminarCliente frmE, frmModificarCliente frmM, frmBuscarCliente frmB) {
         this.mod = mod;
         this.modC = modC;
         this.frm = frm;
-        this.frmL = frmL;
         this.frmE = frmE;
         this.frmM = frmM;
         this.frmB = frmB;
@@ -39,8 +37,6 @@ public class CtrlCliente implements ActionListener {
         this.frm.btnGuardar.addActionListener(this);
         this.frm.btnModificar.addActionListener(this);
         this.frmE.btnEliminarRegistro.addActionListener(this);
-        this.frm.btnListar.addActionListener(this);
-        this.frmL.btnListar.addActionListener(this);
         this.frmM.btnActualizar.addActionListener(this);
     }
 
@@ -61,7 +57,6 @@ public class CtrlCliente implements ActionListener {
         try {
             while (rs.next()) {
                 md.addRow(new Object[]{rs.getInt("id"), rs.getString("Cedula"), rs.getString("Nombres"), rs.getString("Apellidos"), rs.getString("Telefono"), rs.getString("Direccion"), rs.getString("Email")});
-                frmL.tblListarCliente.setModel(md);
                 frmE.tblCliente.setModel(md);
                 frmM.tblCliente.setModel(md);
                 frmB.tblCliente.setModel(md);
@@ -73,9 +68,10 @@ public class CtrlCliente implements ActionListener {
 
     
     
-    //ELIMINAR CLIENTE CONTROLADOR
+   //ELIMINAR CLIENTE CONTROLADOR
     public void Eliminar(){
         int fila =frmE.tblCliente.getSelectedRowCount();
+        System.out.println(fila);
         //si no selecciona ningun registro
         if(fila<1){
             JOptionPane.showMessageDialog(null, "Debe de seleccionar un registro de la tabla ","AVISO",JOptionPane.INFORMATION_MESSAGE);
@@ -142,9 +138,8 @@ public class CtrlCliente implements ActionListener {
 
         
         if (e.getSource() == frmE.btnEliminarRegistro) {
-            Listar();
             Eliminar();
-            
+            Listar();
             frmE.txtBusqueda.setText("");
         }
 

@@ -49,7 +49,6 @@ public class frmRegistrarClientes extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnListar = new javax.swing.JButton();
         btnGuardar1 = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
@@ -76,7 +75,7 @@ public class frmRegistrarClientes extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, -1, -1));
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
@@ -123,6 +122,11 @@ public class frmRegistrarClientes extends javax.swing.JFrame {
         });
         jPanel3.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 70, 250, -1));
 
+        txtCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCedulaActionPerformed(evt);
+            }
+        });
         txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtCedulaKeyTyped(evt);
@@ -154,7 +158,7 @@ public class frmRegistrarClientes extends javax.swing.JFrame {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 110, 430, 262));
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnModificar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -174,15 +178,6 @@ public class frmRegistrarClientes extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, 120, 30));
-
-        btnListar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        btnListar.setText("LISTAR");
-        btnListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, 30));
 
         btnGuardar1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         btnGuardar1.setText("REGISTRAR");
@@ -227,11 +222,10 @@ public class frmRegistrarClientes extends javax.swing.JFrame {
          Cliente c = new Cliente();
         ConsultasCliente modC =new ConsultasCliente();
         frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmListarClientes frmL = new frmListarClientes();
         frmBuscarCliente frmB = new frmBuscarCliente();
         frmEliminarCliente frmE = new frmEliminarCliente();
         frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmL, frmE, frmM,frmB);
+        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmE, frmM,frmB);
             frmM.setVisible(true);
             this.setVisible(false);
             ctrlc.Listar();
@@ -241,29 +235,14 @@ public class frmRegistrarClientes extends javax.swing.JFrame {
          Cliente c = new Cliente();
         ConsultasCliente modC =new ConsultasCliente();
         frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmListarClientes frmL = new frmListarClientes();
         frmBuscarCliente frmB = new frmBuscarCliente();
         frmEliminarCliente frmE = new frmEliminarCliente();
         frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmL, frmE, frmM,frmB);
+        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmE, frmM,frmB);
             frmE.setVisible(true);
             this.setVisible(false);
             ctrlc.Listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
-
-    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-            Cliente c = new Cliente();
-        ConsultasCliente modC =new ConsultasCliente();
-        frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmListarClientes frmL = new frmListarClientes();
-        frmBuscarCliente frmB = new frmBuscarCliente();
-        frmEliminarCliente frmE = new frmEliminarCliente();
-        frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmL, frmE, frmM,frmB);
-            frmL.setVisible(true);
-            this.setVisible(false);
-            ctrlc.Listar();
-    }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
         this.setVisible(false);
@@ -325,15 +304,18 @@ public class frmRegistrarClientes extends javax.swing.JFrame {
         Cliente c = new Cliente();
         ConsultasCliente modC =new ConsultasCliente();
         frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmListarClientes frmL = new frmListarClientes();
         frmBuscarCliente frmB = new frmBuscarCliente();
         frmEliminarCliente frmE = new frmEliminarCliente();
         frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmL, frmE, frmM,frmB);
+        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm,  frmE, frmM,frmB);
             frmB.setVisible(true);
             this.setVisible(false);
             ctrlc.Listar();
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void txtCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCedulaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCedulaActionPerformed
      
    
     
@@ -349,7 +331,6 @@ public class frmRegistrarClientes extends javax.swing.JFrame {
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar;
     public javax.swing.JButton btnGuardar1;
-    public javax.swing.JButton btnListar;
     public javax.swing.JButton btnModificar;
     private javax.swing.JButton btnback;
     private javax.swing.JLabel jLabel1;

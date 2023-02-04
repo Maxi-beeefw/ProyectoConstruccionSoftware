@@ -94,7 +94,7 @@ public class ConsultasCliente extends Conexion {
         return rs;
     }
     
-    //METODO ELIMINAR CLIENTE
+     //METODO ELIMINAR CLIENTE
     public static boolean Eliminar(String id) {
 
         PreparedStatement ps = null;

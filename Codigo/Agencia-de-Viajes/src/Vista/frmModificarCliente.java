@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
  * @author hp
  */
 public class frmModificarCliente extends javax.swing.JFrame {
-
+    String buscar_box;
     /**
      * Creates new form frmBuscarCliente
      */
@@ -41,13 +41,12 @@ public class frmModificarCliente extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         btnModificar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnListar = new javax.swing.JButton();
         btnGuardar1 = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         btnback = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
+        cb_buscar = new javax.swing.JComboBox<>();
         txtBusqueda = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
         btnActualizar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -94,7 +93,7 @@ public class frmModificarCliente extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Operaciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnModificar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -115,15 +114,6 @@ public class frmModificarCliente extends javax.swing.JFrame {
             }
         });
         jPanel4.add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 120, 30));
-
-        btnListar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        btnListar.setText("LISTAR");
-        btnListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarActionPerformed(evt);
-            }
-        });
-        jPanel4.add(btnListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 120, 30));
 
         btnGuardar1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         btnGuardar1.setText("REGISTRAR");
@@ -152,7 +142,10 @@ public class frmModificarCliente extends javax.swing.JFrame {
         });
 
         jPanel6.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Busqueda por Cedula", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Busqueda por Cedula", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+
+        cb_buscar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        cb_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Cedula", "Nombre", "Apellido", "Direccion" }));
 
         txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -163,36 +156,30 @@ public class frmModificarCliente extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Cedula :");
-
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(cb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(txtBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(cb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         btnActualizar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         btnActualizar.setText("GUARDAR CAMBIOS");
 
         jPanel3.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
@@ -352,10 +339,34 @@ public class frmModificarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBusquedaKeyReleased
 
     private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
-        char c= evt.getKeyChar();
-        String busqueda=txtBusqueda.getText().trim();
-        if(!Character.isDigit(c) || busqueda.length()>=10) evt.consume();
-        if(txtBusqueda.getText().length()>=10) evt.consume();
+         buscar_box=(String)cb_buscar.getSelectedItem();
+        if (buscar_box.equals("Cedula")) {
+            char c= evt.getKeyChar();
+            String cedula=txtBusqueda.getText().trim();
+            if(!Character.isDigit(c) || cedula.length()>=10) evt.consume();
+            if(txtBusqueda.getText().length()>=10) evt.consume();
+        }else if(buscar_box.equals("Nombre")){
+            char c= evt.getKeyChar();
+            if (Character.isLowerCase(c)) {
+                evt.setKeyChar(Character.toUpperCase(c));
+            }
+            if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
+            if(txtBusqueda.getText().length()>=30) evt.consume();
+        }else if (buscar_box.equals("Apellido")) {
+            char c= evt.getKeyChar();
+            if (Character.isLowerCase(c)) {
+                evt.setKeyChar(Character.toUpperCase(c));
+            }
+            if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
+            if(txtBusqueda.getText().length()>=30) evt.consume();
+        } else if (buscar_box.equals("Direccion")){
+            char c= evt.getKeyChar();
+            if (Character.isLowerCase(c)) {
+                evt.setKeyChar(Character.toUpperCase(c));
+            }
+            if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
+            if(txtBusqueda.getText().length()>=30) evt.consume();
+        }
     }//GEN-LAST:event_txtBusquedaKeyTyped
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
@@ -366,39 +377,23 @@ public class frmModificarCliente extends javax.swing.JFrame {
          Cliente c = new Cliente();
         ConsultasCliente modC =new ConsultasCliente();
         frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmListarClientes frmL = new frmListarClientes();
         frmBuscarCliente frmB = new frmBuscarCliente();
         frmEliminarCliente frmE = new frmEliminarCliente();
         frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmL, frmE, frmM,frmB);
+        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm,  frmE, frmM,frmB);
         frmE.setVisible(true);
         this.setVisible(false);
         ctrlc.Listar();
     }//GEN-LAST:event_btnEliminarActionPerformed
 
-    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-         Cliente c = new Cliente();
-        ConsultasCliente modC =new ConsultasCliente();
-        frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmListarClientes frmL = new frmListarClientes();
-        frmBuscarCliente frmB = new frmBuscarCliente();
-        frmEliminarCliente frmE = new frmEliminarCliente();
-        frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmL, frmE, frmM,frmB);
-        frmL.setVisible(true);
-        this.setVisible(false);
-        ctrlc.Listar();
-    }//GEN-LAST:event_btnListarActionPerformed
-
     private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
          Cliente c = new Cliente();
         ConsultasCliente modC =new ConsultasCliente();
         frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmListarClientes frmL = new frmListarClientes();
         frmBuscarCliente frmB = new frmBuscarCliente();
         frmEliminarCliente frmE = new frmEliminarCliente();
         frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmL, frmE, frmM,frmB);
+        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmE, frmM,frmB);
             frm.setVisible(true);
             this.setVisible(false);
     }//GEN-LAST:event_btnGuardar1ActionPerformed
@@ -407,11 +402,10 @@ public class frmModificarCliente extends javax.swing.JFrame {
         Cliente c = new Cliente();
         ConsultasCliente modC =new ConsultasCliente();
         frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmListarClientes frmL = new frmListarClientes();
         frmBuscarCliente frmB = new frmBuscarCliente();
         frmEliminarCliente frmE = new frmEliminarCliente();
         frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmL, frmE, frmM,frmB);        
+        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmE, frmM,frmB);        
             frmB.setVisible(true);
             this.setVisible(false);
             ctrlc.Listar();
@@ -483,7 +477,7 @@ public class frmModificarCliente extends javax.swing.JFrame {
         this.txtEmail.setText(tblCliente.getValueAt(seleccion, 6).toString());
     }//GEN-LAST:event_tblClienteMouseClicked
     //buscar solo con el txtfield sin usar boton
-    public void buscarCliente(String buscar) {
+     public void buscarCliente(String buscar) {
         Connection con = getConnection();
         DefaultTableModel modelo = new DefaultTableModel();
         //Creando el modelo del jtable
@@ -496,15 +490,20 @@ public class frmModificarCliente extends javax.swing.JFrame {
         modelo.addColumn("Email");
         tblCliente.setModel(modelo);
         String sql = "";
+        buscar_box=(String)cb_buscar.getSelectedItem();
         //Si el textfield esta vacio entonces presentar toda la tabla caso contrario presentar solo el dato buscado - Busqueda por Cedula
-        if (buscar.equals("")) {
-            sql = "Select*from CLIENTE";
-        } else {
-            sql = "Select*from CLIENTE where Cedula like'%" + buscar + "%'";
+        if (buscar_box.equals("Cedula")) {
+           sql = "Select*from CLIENTE where CEDULA like'" + buscar + "%'";
+        }else if(buscar_box.equals("Nombre")){
+            sql = "Select*from CLIENTE where NOMBRES like'%" + buscar + "%'";
+        }else if (buscar_box.equals("Apellido")) {
+            sql = "Select*from CLIENTE where APELLIDOS like'%" + buscar + "%'";
+        } else if (buscar_box.equals("Direccion")){
+            sql = "Select*from CLIENTE where DIRECCION like'" + buscar + "%'";
         }
         String Clientes[] = new String[7];
         Statement set;
-        try { 
+        try {
             set = con.createStatement();
             ResultSet resul = set.executeQuery(sql);
             while (resul.next()) {
@@ -523,16 +522,15 @@ public class frmModificarCliente extends javax.swing.JFrame {
             System.out.println(ex);
         }
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnEliminar;
     public javax.swing.JButton btnGuardar1;
-    public javax.swing.JButton btnListar;
     public javax.swing.JButton btnModificar;
     private javax.swing.JButton btnback;
+    private javax.swing.JComboBox<String> cb_buscar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
@@ -542,7 +540,6 @@ public class frmModificarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

@@ -141,11 +141,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         Cliente c = new Cliente();
         ConsultasCliente modC =new ConsultasCliente();
         frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmListarClientes frmL = new frmListarClientes();
         frmBuscarCliente frmB = new frmBuscarCliente();
         frmEliminarCliente frmE = new frmEliminarCliente();
         frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmL, frmE, frmM,frmB);
+        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmE, frmM,frmB);
         ctrlc.iniciar();
         frm.setVisible(true);
     }//GEN-LAST:event_menuClienteActionPerformed
