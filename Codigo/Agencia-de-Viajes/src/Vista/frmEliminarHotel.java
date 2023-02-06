@@ -1,9 +1,9 @@
 package Vista;
 
-import Controlador.CtrlCliente;
-import Modelo.Cliente;
+import Controlador.CtrlHotel;
+import Modelo.Hotel;
 import static Modelo.Conexion.getConnection;
-import Modelo.ConsultasCliente;
+import Modelo.ConsultasHotel;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -15,12 +15,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author hp
  */
-public class frmEliminarCliente extends javax.swing.JFrame {
+public class frmEliminarHotel extends javax.swing.JFrame {
     String buscar_box;
     /**
      * Creates new form frmBuscarCliente
      */
-    public frmEliminarCliente() {
+    public frmEliminarHotel() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -48,7 +48,7 @@ public class frmEliminarCliente extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tblCliente = new javax.swing.JTable();
+        tblHotel = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -67,16 +67,16 @@ public class frmEliminarCliente extends javax.swing.JFrame {
         });
 
         cb_buscar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        cb_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Cedula", "Nombre", "Apellido", "Direccion" }));
+        cb_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Nombre", "Ubicacion" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(12, 12, 12)
                 .addComponent(cb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
         );
@@ -87,7 +87,7 @@ public class frmEliminarCliente extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(184, 72, -1, -1));
@@ -159,7 +159,7 @@ public class frmEliminarCliente extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("ELIMINAR CLIENTES");
 
-        tblCliente.setModel(new javax.swing.table.DefaultTableModel(
+        tblHotel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -170,7 +170,7 @@ public class frmEliminarCliente extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(tblCliente);
+        jScrollPane3.setViewportView(tblHotel);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -226,51 +226,39 @@ public class frmEliminarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnbackActionPerformed
 
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
-        buscarCliente(txtBusqueda.getText());//llamando al metodo buscar
+        buscarHotel(txtBusqueda.getText());//llamando al metodo buscar
     }//GEN-LAST:event_txtBusquedaKeyReleased
 
     private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
-       buscar_box=(String)cb_buscar.getSelectedItem();
-        if (buscar_box.equals("Cedula")) {
-            char c= evt.getKeyChar();
-            String cedula=txtBusqueda.getText().trim();
-            if(!Character.isDigit(c) || cedula.length()>=10) evt.consume();
-            if(txtBusqueda.getText().length()>=10) evt.consume();
-        }else if(buscar_box.equals("Nombre")){
+        buscar_box=(String)cb_buscar.getSelectedItem();
+      if(buscar_box.equals("Nombre")){
             char c= evt.getKeyChar();
             if (Character.isLowerCase(c)) {
                 evt.setKeyChar(Character.toUpperCase(c));
             }
             if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
             if(txtBusqueda.getText().length()>=30) evt.consume();
-        }else if (buscar_box.equals("Apellido")) {
+        }else if (buscar_box.equals("Ubicacion")) {
             char c= evt.getKeyChar();
             if (Character.isLowerCase(c)) {
                 evt.setKeyChar(Character.toUpperCase(c));
             }
             if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
-            if(txtBusqueda.getText().length()>=30) evt.consume();
-        } else if (buscar_box.equals("Direccion")){
-            char c= evt.getKeyChar();
-            if (Character.isLowerCase(c)) {
-                evt.setKeyChar(Character.toUpperCase(c));
-            }
-            if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
-            if(txtBusqueda.getText().length()>=30) evt.consume();
+            if(txtBusqueda.getText().length()>=40) evt.consume();
         }
     }//GEN-LAST:event_txtBusquedaKeyTyped
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        Cliente c = new Cliente();
-        ConsultasCliente modC = new ConsultasCliente();
-        frmRegistrarClientes frm = new frmRegistrarClientes();
-        frmBuscarCliente frmB = new frmBuscarCliente();
-        frmEliminarCliente frmE = new frmEliminarCliente();
-        frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmE, frmM, frmB);
+        Hotel h = new Hotel();
+        ConsultasHotel modH =new ConsultasHotel();
+        frmRegistrarHotel frmR=new frmRegistrarHotel();
+        frmBuscarHotel frmB = new frmBuscarHotel();
+        frmEliminarHotel frmE = new frmEliminarHotel();
+        frmModificarHotel frmM = new frmModificarHotel();
+        CtrlHotel ctrlc = new CtrlHotel(h, modH, frmR,  frmE, frmM,frmB);
         frmM.setVisible(true);
         this.setVisible(false);
-//        ctrlc.Listar();
+        ctrlc.Listar();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -278,25 +266,25 @@ public class frmEliminarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
-        Cliente c = new Cliente();
-        ConsultasCliente modC = new ConsultasCliente();
-        frmRegistrarClientes frm = new frmRegistrarClientes();
-        frmBuscarCliente frmB = new frmBuscarCliente();
-        frmEliminarCliente frmE = new frmEliminarCliente();
-        frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmE, frmM, frmB);
-        frm.setVisible(true);
+        Hotel h = new Hotel();
+        ConsultasHotel modH =new ConsultasHotel();
+        frmRegistrarHotel frmR=new frmRegistrarHotel();
+        frmBuscarHotel frmB = new frmBuscarHotel();
+        frmEliminarHotel frmE = new frmEliminarHotel();
+        frmModificarHotel frmM = new frmModificarHotel();
+        CtrlHotel ctrlc = new CtrlHotel(h, modH, frmR,  frmE, frmM,frmB);
+        frmR.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnGuardar1ActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        Cliente c = new Cliente();
-        ConsultasCliente modC = new ConsultasCliente();
-        frmRegistrarClientes frm = new frmRegistrarClientes();
-        frmBuscarCliente frmB = new frmBuscarCliente();
-        frmEliminarCliente frmE = new frmEliminarCliente();
-        frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmE, frmM, frmB);
+        Hotel h = new Hotel();
+        ConsultasHotel modH =new ConsultasHotel();
+        frmRegistrarHotel frmR=new frmRegistrarHotel();
+        frmBuscarHotel frmB = new frmBuscarHotel();
+        frmEliminarHotel frmE = new frmEliminarHotel();
+        frmModificarHotel frmM = new frmModificarHotel();
+        CtrlHotel ctrlc = new CtrlHotel(h, modH, frmR,  frmE, frmM,frmB);
         frmB.setVisible(true);
         this.setVisible(false);
         ctrlc.Listar();
@@ -306,47 +294,41 @@ public class frmEliminarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarRegistroActionPerformed
     //buscar solo con el txtfield sin usar boton
-    public void buscarCliente(String buscar) {
+   public void buscarHotel(String buscar) {
         Connection con = getConnection();
         DefaultTableModel modelo = new DefaultTableModel();
         //Creando el modelo del jtable
-        modelo.addColumn("Id");
-        modelo.addColumn("Cedula");
-        modelo.addColumn("Nombres");
-        modelo.addColumn("Apellidos");
-        modelo.addColumn("Telefono");
-        modelo.addColumn("Direccion");
-        modelo.addColumn("Email");
-        tblCliente.setModel(modelo);
+        modelo.addColumn("IDHOTEL");
+        modelo.addColumn("NOMBRE");
+        modelo.addColumn("UBICACION");
+        modelo.addColumn("TELEFONO");
+        modelo.addColumn("DISPONIBILIDAD");
+        modelo.addColumn("SERVICIOS");
+        tblHotel.setModel(modelo);
         String sql = "";
         buscar_box=(String)cb_buscar.getSelectedItem();
         //Si el textfield esta vacio entonces presentar toda la tabla caso contrario presentar solo el dato buscado - Busqueda por Cedula
-        if (buscar_box.equals("Cedula")) {
-           sql = "Select*from CLIENTE where CEDULA like'" + buscar + "%'";
-        }else if(buscar_box.equals("Nombre")){
-            sql = "Select*from CLIENTE where NOMBRES like'%" + buscar + "%'";
-        }else if (buscar_box.equals("Apellido")) {
-            sql = "Select*from CLIENTE where APELLIDOS like'%" + buscar + "%'";
-        } else if (buscar_box.equals("Direccion")){
-            sql = "Select*from CLIENTE where DIRECCION like'" + buscar + "%'";
+        if (buscar_box.equals("Nombre")) {
+           sql = "Select * from HOTEL where NOMBRE like'" + buscar + "%'";
+        }else if(buscar_box.equals("Ubicacion")){
+            sql = "Select * from HOTEL where UBICACION like'" + buscar + "%'";
         }
-        String Clientes[] = new String[7];
+        String Hoteles[] = new String[6];
         Statement set;
         try {
             set = con.createStatement();
             ResultSet resul = set.executeQuery(sql);
             while (resul.next()) {
-                Clientes[0] = resul.getString(1);
-                Clientes[1] = resul.getString(2);
-                Clientes[2] = resul.getString(3);
-                Clientes[3] = resul.getString(4);
-                Clientes[4] = resul.getString(5);
-                Clientes[5] = resul.getString(6);
-                Clientes[6] = resul.getString(7);
-                modelo.addRow(Clientes);
+                Hoteles[0] = resul.getString(1);
+                Hoteles[1] = resul.getString(2);
+                Hoteles[2] = resul.getString(3);
+                Hoteles[3] = resul.getString(4);
+                Hoteles[4] = resul.getString(5);
+                Hoteles[5] = resul.getString(6);
+                modelo.addRow(Hoteles);
 
             }
-            tblCliente.setModel(modelo);
+            tblHotel.setModel(modelo);
         } catch (SQLException ex) {
             System.out.println(ex);
         }
@@ -367,7 +349,7 @@ public class frmEliminarCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane3;
-    public javax.swing.JTable tblCliente;
+    public javax.swing.JTable tblHotel;
     public javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }

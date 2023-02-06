@@ -152,21 +152,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void menuHotelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHotelesActionPerformed
         Hotel h = new Hotel();
         ConsultasHotel modH =new ConsultasHotel();
-        frmHotel frmh=new frmHotel();
-        
-        CtrlHotel ctrlh = new CtrlHotel(h,modH,frmh);
-        ctrlh.iniciar();
-        frmh.setVisible(true);
+        frmRegistrarHotel frmR=new frmRegistrarHotel();
+        frmBuscarHotel frmB = new frmBuscarHotel();
+        frmEliminarHotel frmE = new frmEliminarHotel();
+        frmModificarHotel frmM = new frmModificarHotel();
+        CtrlHotel ctrlc = new CtrlHotel(h, modH, frmR,  frmE, frmM,frmB);
+        ctrlc.iniciar();
+        frmR.setVisible(true);
     }//GEN-LAST:event_menuHotelesActionPerformed
 
     private void menuVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVuelosActionPerformed
-        Vuelo v= new Vuelo();
-        ConsultasVuelo modV =new ConsultasVuelo();
-        frmVuelo frmv=new frmVuelo();
         
-        CtrlVuelo ctrlv= new CtrlVuelo(v,modV,frmv);
-        ctrlv.iniciar();
-        frmv.setVisible(true);
     }//GEN-LAST:event_menuVuelosActionPerformed
    
     

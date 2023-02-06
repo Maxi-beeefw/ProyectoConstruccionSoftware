@@ -10,23 +10,22 @@ import java.sql.ResultSet;
  */
 public class ConsultasHotel extends Conexion {
     
-    //METODO REGISTRAR Hotel
+    //METODO REGISTRAR CLIENTE
     public boolean registrar(Hotel h) {
 
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "INSERT INTO HOTEL (IDHOTEL, Nombre , Ubicacion, Telefono, Disponibilidad, Servicios) "
-                + "VALUES(?,?,?,?,?,?)";//Insertando datos en la tabla HOTEL
+        String sql = "INSERT INTO HOTEL (NOMBRE, UBICACION, TELEFONO, DISPONIBILIDAD, SERVICIOS) "
+                + "VALUES(?,?,?,?,?)";//Insertando datos en la tabla HOTEL
 
         try {
             ps = (PreparedStatement) con.prepareStatement(sql);
-            ps.setInt(1, h.getIdHotel());
-            ps.setString(2, h.getNombre());
-            ps.setString(3, h.getUbicacion());
-            ps.setString(4, h.getTelefono());
-            ps.setString(5, h.getDisponibilidad());
-            ps.setString(6, h.getServicios());
+            ps.setString(1, h.getNombre());
+            ps.setString(2, h.getUbicacion());
+            ps.setString(3, h.getTelefono());
+            ps.setString(4, h.getDisponibilidad());
+            ps.setString(5, h.getServicios());
             ps.execute();
             return true;
 
@@ -43,24 +42,22 @@ public class ConsultasHotel extends Conexion {
         }
     }
     
-    //METODO MODIFICAR HOTEL
+    //METODO MODIFICAR CLIENTE
      public boolean modificar(Hotel h) {
 
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE HOTEL SET Nombre = ?, Ubicacion=?, Telefono=?, Disponibilidad=?, Servicios=? WHERE IdHotel= ?";
+        String sql = "UPDATE HOTEL SET UBICACION=?, TELEFONO=?, DISPONIBILIDAD=?, SERVICIOS=? WHERE NOMBRE =? ";
    
         try {
             
             ps = con.prepareStatement(sql);
- 
-            ps.setString(1, h.getNombre());
-            ps.setString(2, h.getUbicacion());
-            ps.setString(3, h.getTelefono());
-            ps.setString(4, h.getDisponibilidad());
-            ps.setString(5, h.getServicios());
-            ps.setInt(6, h.getIdHotel());
+            ps.setString(1, h.getUbicacion());
+            ps.setString(2, h.getTelefono());
+            ps.setString(3, h.getDisponibilidad());
+            ps.setString(4, h.getServicios());
+            ps.setString(5, h.getNombre());
             //Envia la sentencia de Actualizar
             ps.executeUpdate();
             con.close();
@@ -80,7 +77,7 @@ public class ConsultasHotel extends Conexion {
     }
        
     
-    //METODO LISTAR HOTELES
+    //METODO LISTAR CLIENTES
     public static ResultSet ListarTabla(String consulta){
         Statement sql;
         ResultSet rs=null;
@@ -90,18 +87,17 @@ public class ConsultasHotel extends Conexion {
             rs=sql.executeQuery(consulta);
         } catch (Exception e) {
             System.out.println(e);
-           
         }
         return rs;
     }
     
-    //METODO ELIMINAR HOTEL
+     //METODO ELIMINAR CLIENTE
     public static boolean Eliminar(String id) {
 
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "delete from HOTEL where IdHotel="+id;
+        String sql = "DELETE from HOTEL where IDHOTEL="+id;
 
         try {
             ps = con.prepareStatement(sql);

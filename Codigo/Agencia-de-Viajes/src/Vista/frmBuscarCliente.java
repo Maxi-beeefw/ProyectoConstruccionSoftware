@@ -263,7 +263,7 @@ public class frmBuscarCliente extends javax.swing.JFrame {
         CtrlCliente ctrlc = new CtrlCliente(c, modC, frm,  frmE, frmM, frmB);
         frmM.setVisible(true);
         this.setVisible(false);
-        ctrlc.Listar();
+//        ctrlc.Listar();
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed

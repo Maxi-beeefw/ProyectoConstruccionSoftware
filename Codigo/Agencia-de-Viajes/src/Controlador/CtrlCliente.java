@@ -51,7 +51,7 @@ public class CtrlCliente implements ActionListener {
     //LISTAR en la interfaz de LISTAR CLIENTES
     public void Listar() {
         DefaultTableModel md = new DefaultTableModel();
-        ResultSet rs = ConsultasCliente.ListarTabla("select * from CLIENTE ORDER BY ID");
+        ResultSet rs = ConsultasCliente.ListarTabla("select * from CONSUL_CLIENTES");
         md.setColumnIdentifiers(new Object[]{"Id", "Cedula", "Nombres", "Apellidos", "Telefono", "Direccion", "Email"});
 
         try {
@@ -71,7 +71,6 @@ public class CtrlCliente implements ActionListener {
    //ELIMINAR CLIENTE CONTROLADOR
     public void Eliminar(){
         int fila =frmE.tblCliente.getSelectedRowCount();
-        System.out.println(fila);
         //si no selecciona ningun registro
         if(fila<1){
             JOptionPane.showMessageDialog(null, "Debe de seleccionar un registro de la tabla ","AVISO",JOptionPane.INFORMATION_MESSAGE);
