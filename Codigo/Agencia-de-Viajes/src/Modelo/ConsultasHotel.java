@@ -13,14 +13,13 @@ public class ConsultasHotel extends Conexion {
     //METODO REGISTRAR CLIENTE
     public boolean registrar(Hotel h) {
 
-        PreparedStatement ps = null;
+        CallableStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "INSERT INTO HOTEL (NOMBRE, UBICACION, TELEFONO, DISPONIBILIDAD, SERVICIOS) "
-                + "VALUES(?,?,?,?,?)";//Insertando datos en la tabla HOTEL
+        String sql = "{CALL REGISTRAR_HOTEL(INCREMENTADOIDHOTEL.NEXTVAL,?,?,?,?,?)}";//Insertando datos en la tabla HOTEL
 
         try {
-            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps = (CallableStatement) con.prepareCall(sql);
             ps.setString(1, h.getNombre());
             ps.setString(2, h.getUbicacion());
             ps.setString(3, h.getTelefono());
@@ -45,19 +44,20 @@ public class ConsultasHotel extends Conexion {
     //METODO MODIFICAR CLIENTE
      public boolean modificar(Hotel h) {
 
-        PreparedStatement ps = null;
+        CallableStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE HOTEL SET UBICACION=?, TELEFONO=?, DISPONIBILIDAD=?, SERVICIOS=? WHERE NOMBRE =? ";
+        String sql = "{CALL ACTUALIZAR_HOTEL(?,?,?,?,?,?)}";
    
         try {
             
-            ps = con.prepareStatement(sql);
-            ps.setString(1, h.getUbicacion());
-            ps.setString(2, h.getTelefono());
-            ps.setString(3, h.getDisponibilidad());
-            ps.setString(4, h.getServicios());
-            ps.setString(5, h.getNombre());
+            ps = con.prepareCall(sql);
+            ps.setInt(1, h.getIdHotel());
+            ps.setString(2, h.getNombre());
+            ps.setString(3, h.getUbicacion());
+            ps.setString(4, h.getTelefono());
+            ps.setString(5, h.getDisponibilidad());
+            ps.setString(6, h.getServicios());
             //Envia la sentencia de Actualizar
             ps.executeUpdate();
             con.close();
@@ -93,14 +93,15 @@ public class ConsultasHotel extends Conexion {
     
      //METODO ELIMINAR CLIENTE
     public static boolean Eliminar(String id) {
-
-        PreparedStatement ps = null;
+        int idH=Integer.parseInt(id);
+        CallableStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "DELETE from HOTEL where IDHOTEL="+id;
+        String sql = "{CALL ELIMINAR_HOTEL(?)}";
 
         try {
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
+             ps.setInt(1, idH);
             
             
             ps.execute();

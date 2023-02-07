@@ -13,14 +13,13 @@ public class ConsultasCliente extends Conexion {
     //METODO REGISTRAR CLIENTE
     public boolean registrar(Cliente c) {
 
-        PreparedStatement ps = null;
+        CallableStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "INSERT INTO CLIENTE (Cedula , Nombres, Apellidos, Telefono, Direccion, Email) "
-                + "VALUES(?,?,?,?,?,?)";//Insertando datos en la tabla CLIENTE
+        String sql = "{CALL REGISTRAR_CLIENTE(INCREMENTADOIDCLIENTE.NEXTVAL,?,?,?,?,?,?)}";//Insertando datos en la tabla CLIENTE
 
         try {
-            ps = (PreparedStatement) con.prepareStatement(sql);
+            ps = (CallableStatement) con.prepareCall(sql);
             ps.setString(1, c.getCedula());
             ps.setString(2, c.getNombres());
             ps.setString(3, c.getApellidos());
@@ -46,20 +45,21 @@ public class ConsultasCliente extends Conexion {
     //METODO MODIFICAR CLIENTE
      public boolean modificar(Cliente c) {
 
-        PreparedStatement ps = null;
+        CallableStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE CLIENTE SET Nombres=?, Apellidos=?, Telefono=?, Direccion=?, Email=? WHERE CEDULA =? ";
+        String sql = "{CALL ACTUALIZAR_CLIENTE(?,?,?,?,?,?,?)}";
    
         try {
             
-            ps = con.prepareStatement(sql);
-            ps.setString(1, c.getNombres());
-            ps.setString(2, c.getApellidos());
-            ps.setString(3, c.getTelefono());
-            ps.setString(4, c.getDireccion());
-            ps.setString(5, c.getEmail());
-            ps.setString(6, c.getCedula());
+            ps = con.prepareCall(sql);
+            ps.setInt(1, c.getIdCliente());
+            ps.setString(2, c.getCedula());
+            ps.setString(3, c.getNombres());
+            ps.setString(4, c.getApellidos());
+            ps.setString(5, c.getTelefono());
+            ps.setString(6, c.getDireccion());
+            ps.setString(7, c.getEmail());
             //Envia la sentencia de Actualizar
             ps.executeUpdate();
             con.close();
@@ -96,14 +96,15 @@ public class ConsultasCliente extends Conexion {
     
      //METODO ELIMINAR CLIENTE
     public static boolean Eliminar(String id) {
-
-        PreparedStatement ps = null;
+        int idC=Integer.parseInt(id);
+        CallableStatement ps = null;
         Connection con = getConnection();
-
-        String sql = "delete from CLIENTE where Id="+id;
+        
+        String sql = "{CALL ELIMINAR_CLIENTE(?)}";
 
         try {
-            ps = con.prepareStatement(sql);
+            ps = con.prepareCall(sql);
+            ps.setInt(1, idC);
             
             
             ps.execute();

@@ -78,7 +78,6 @@ public class CtrlCliente implements ActionListener {
             if(modC.Eliminar(frmE.tblCliente.getValueAt(frmE.tblCliente.getSelectedRow(), 0).toString())){
             JOptionPane.showMessageDialog(null, "Registro Eliminado!"); 
             }
-        
         }
     
     }
