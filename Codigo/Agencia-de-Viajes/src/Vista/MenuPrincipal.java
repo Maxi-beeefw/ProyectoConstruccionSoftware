@@ -84,10 +84,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(76, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(menuVuelos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menuHoteles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menuCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(menuVuelos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuHoteles, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))
                 .addGap(74, 74, 74))
         );
         jPanel2Layout.setVerticalGroup(
@@ -132,7 +132,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addComponent(jLabel2))))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1090, 640));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, 650));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -140,29 +140,37 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void menuClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuClienteActionPerformed
         Cliente c = new Cliente();
         ConsultasCliente modC =new ConsultasCliente();
-        frmRegistrarClientes frm=new frmRegistrarClientes();
-        frmBuscarCliente frmB = new frmBuscarCliente();
-        frmEliminarCliente frmE = new frmEliminarCliente();
-        frmModificarCliente frmM = new frmModificarCliente();
-        CtrlCliente ctrlc = new CtrlCliente(c, modC, frm, frmE, frmM,frmB);
+        frmCliente frmC= new frmCliente();
+        frmModCliente frmMod = new frmModCliente();
+        CtrlCliente ctrlc= new CtrlCliente(c, modC, frmC,frmMod);
         ctrlc.iniciar();
-        frm.setVisible(true);
+        this.setVisible(false);
+        frmC.setVisible(true);
+        ctrlc.Listar();
     }//GEN-LAST:event_menuClienteActionPerformed
 
     private void menuHotelesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuHotelesActionPerformed
         Hotel h = new Hotel();
         ConsultasHotel modH =new ConsultasHotel();
-        frmRegistrarHotel frmR=new frmRegistrarHotel();
-        frmBuscarHotel frmB = new frmBuscarHotel();
-        frmEliminarHotel frmE = new frmEliminarHotel();
-        frmModificarHotel frmM = new frmModificarHotel();
-        CtrlHotel ctrlc = new CtrlHotel(h, modH, frmR,  frmE, frmM,frmB);
+        frmHotel frmH= new frmHotel();
+        frmModHotel frmMod = new frmModHotel();
+        CtrlHotel ctrlc= new CtrlHotel(h, modH, frmH, frmMod);
         ctrlc.iniciar();
-        frmR.setVisible(true);
+        this.setVisible(false);
+        frmH.setVisible(true);
+        ctrlc.Listar();
     }//GEN-LAST:event_menuHotelesActionPerformed
 
     private void menuVuelosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVuelosActionPerformed
-        
+        Vuelo v = new Vuelo();
+        ConsultasVuelo modV =new ConsultasVuelo();
+        frmVuelo frmV= new frmVuelo();
+        frmModVuelo frmMod = new frmModVuelo();
+        CtrlVuelo ctrlc= new CtrlVuelo(v, modV, frmV, frmMod);
+        ctrlc.iniciar();
+        this.setVisible(false);
+        frmV.setVisible(true);
+        ctrlc.Listar();
     }//GEN-LAST:event_menuVuelosActionPerformed
    
     

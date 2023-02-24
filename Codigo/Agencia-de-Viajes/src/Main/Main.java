@@ -15,9 +15,7 @@ public class Main {
     public static void main(String[] args) {
         Cliente mod = new Cliente();
         ConsultasCliente modC =new ConsultasCliente();
-        MenuPrincipal men= new MenuPrincipal();
-        men.setVisible(true);
-        
-
+        MenuPrincipal inicio= new MenuPrincipal();
+        inicio.setVisible(true);
     }
 }

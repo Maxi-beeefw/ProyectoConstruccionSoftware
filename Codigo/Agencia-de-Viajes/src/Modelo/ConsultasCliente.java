@@ -1,5 +1,8 @@
 package Modelo;
 
+import Controlador.CtrlCliente;
+import Vista.*;
+import Modelo.*;
 import java.sql.*;
 import java.sql.SQLException;
 import java.sql.ResultSet;
@@ -15,6 +18,7 @@ public class ConsultasCliente extends Conexion {
 
         CallableStatement ps = null;
         Connection con = getConnection();
+        
 
         String sql = "{CALL REGISTRAR_CLIENTE(INCREMENTADOIDCLIENTE.NEXTVAL,?,?,?,?,?,?)}";//Insertando datos en la tabla CLIENTE
 
@@ -89,7 +93,6 @@ public class ConsultasCliente extends Conexion {
             rs=sql.executeQuery(consulta);
         } catch (Exception e) {
             System.out.println(e);
-           
         }
         return rs;
     }
@@ -105,12 +108,9 @@ public class ConsultasCliente extends Conexion {
         try {
             ps = con.prepareCall(sql);
             ps.setInt(1, idC);
-            
-            
             ps.execute();
             con.close();
             return true;
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
             
