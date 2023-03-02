@@ -15,31 +15,29 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author hp
+ * @Grupo E
  */
-public class ConsultasClienteTest {
-    Cliente c= new Cliente();
-    String consulta,id="1";
-  
-    public ConsultasClienteTest() {
+public class ConsultasVueloTest {
+    Vuelo v= new Vuelo();
+    String consulta="";
+    String id="2";
+    public ConsultasVueloTest() {
     }
 
     @Test
     public void testRegistrar() {
         CallableStatement ps = null;
         Connection con = getConnection();
-        
 
-        String sql = "{CALL REGISTRAR_CLIENTE(INCREMENTADOIDCLIENTE.NEXTVAL,?,?,?,?,?,?)}";//Insertando datos en la tabla CLIENTE
+        String sql = "{CALL REGISTRAR_VUELO(INCREMENTADOIDVUELO.NEXTVAL,?,?,?,?,?)}";//Insertando datos en la tabla VUELO
 
         try {
             ps = (CallableStatement) con.prepareCall(sql);
-            ps.setString(1, c.getCedula());
-            ps.setString(2, c.getNombres());
-            ps.setString(3, c.getApellidos());
-            ps.setString(4, c.getTelefono());
-            ps.setString(5, c.getDireccion());
-            ps.setString(6, c.getEmail());
+            ps.setString(1, v.getNombreAerolinea());
+            ps.setString(2, v.getOrigen());
+            ps.setString(3, v.getDestino());
+            ps.setString(4, v.getEscala());
+            ps.setString(5, v.getDisponibilidad());
             ps.execute();
 
         } catch (SQLException e) {
@@ -55,21 +53,20 @@ public class ConsultasClienteTest {
 
     @Test
     public void testModificar() {
-        CallableStatement ps = null;
+         CallableStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "{CALL ACTUALIZAR_CLIENTE(?,?,?,?,?,?,?)}";
+        String sql = "{CALL ACTUALIZAR_VUELO(?,?,?,?,?,?)}";
    
         try {
             
             ps = con.prepareCall(sql);
-            ps.setInt(1, c.getIdCliente());
-            ps.setString(2, c.getCedula());
-            ps.setString(3, c.getNombres());
-            ps.setString(4, c.getApellidos());
-            ps.setString(5, c.getTelefono());
-            ps.setString(6, c.getDireccion());
-            ps.setString(7, c.getEmail());
+            ps.setInt(1, v.getIdVuelo());
+            ps.setString(2, v.getNombreAerolinea());
+            ps.setString(3, v.getOrigen());
+            ps.setString(4, v.getDestino());
+            ps.setString(5, v.getEscala());
+            ps.setString(6, v.getDisponibilidad());
             //Envia la sentencia de Actualizar
             ps.executeUpdate();
             con.close();
@@ -100,15 +97,15 @@ public class ConsultasClienteTest {
 
     @Test
     public void testEliminar() {
-        int idC=Integer.parseInt(id);
+        int idH=Integer.parseInt(id);
         CallableStatement ps = null;
         Connection con = getConnection();
-        
-        String sql = "{CALL ELIMINAR_CLIENTE(?)}";
+
+        String sql = "{CALL ELIMINAR_VUELO(?)}";
 
         try {
             ps = con.prepareCall(sql);
-            ps.setInt(1, idC);
+            ps.setInt(1, idH);
             ps.execute();
             con.close();
         } catch (Exception e) {

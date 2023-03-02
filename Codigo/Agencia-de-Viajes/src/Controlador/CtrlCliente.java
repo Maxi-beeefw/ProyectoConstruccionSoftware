@@ -75,18 +75,14 @@ public class CtrlCliente implements ActionListener {
 //BOTONES frmCliente --- llamando a los metodos en ConsultasClientes
     @Override
     public void actionPerformed(ActionEvent e) {
-
-        
         //Guardar Cliente 
         if (e.getSource() == frmC.btnGuardar) {
-            
             mod.setCedula(frmC.txtCedula.getText());
             mod.setNombres(frmC.txtNombres.getText());
             mod.setApellidos(frmC.txtApellidos.getText());
             mod.setTelefono(frmC.txtTelefono.getText());
             mod.setDireccion(frmC.txtDireccion.getText());
             mod.setEmail(frmC.txtEmail.getText());
-
             if (modC.registrar(mod)) {
                 JOptionPane.showMessageDialog(null, "Registro Guardado");
                 limpiar();
