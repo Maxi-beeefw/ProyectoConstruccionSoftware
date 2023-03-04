@@ -26,20 +26,27 @@ public class ConsultasClienteTest {
 
     @Test
     public void testRegistrar() {
+        //ESTABLECE LA CONEXION A LA BASE DE DATOS
         CallableStatement ps = null;
         Connection con = getConnection();
         
-
+        //SENTENCIA SQL
         String sql = "{CALL REGISTRAR_CLIENTE(INCREMENTADOIDCLIENTE.NEXTVAL,?,?,?,?,?,?)}";//Insertando datos en la tabla CLIENTE
 
         try {
             ps = (CallableStatement) con.prepareCall(sql);
-            ps.setString(1, c.getCedula());
-            ps.setString(2, c.getNombres());
-            ps.setString(3, c.getApellidos());
-            ps.setString(4, c.getTelefono());
-            ps.setString(5, c.getDireccion());
-            ps.setString(6, c.getEmail());
+            //NUMERO DE CEDULA DEL CLIENTE
+            ps.setString(1, "0954310736");
+            //NOMBRES DEL CLIENTE
+            ps.setString(2, "Maximiliano Stalin");
+            //APELLIDOS DEL CLIENTE
+            ps.setString(3, "Cabrera Gamboa");
+            //NUMERO DE TELEFONO DEL CLIENTE
+            ps.setString(4, "0962712966");
+            //DIRECCION DOMICILIARIA DEL CLIENTE
+            ps.setString(5, "Samborondon-Guayas");
+            //EMAIL DEL CLIENTE
+            ps.setString(6, "maximilianocabrera885@gmail.com");
             ps.execute();
 
         } catch (SQLException e) {
@@ -55,21 +62,30 @@ public class ConsultasClienteTest {
 
     @Test
     public void testModificar() {
+        //ESTABLECE LA CONEXION A LA BASE DE DATOS
         CallableStatement ps = null;
         Connection con = getConnection();
-
+        
+        //SENTENCIA SQL
         String sql = "{CALL ACTUALIZAR_CLIENTE(?,?,?,?,?,?,?)}";
    
         try {
             
             ps = con.prepareCall(sql);
-            ps.setInt(1, c.getIdCliente());
-            ps.setString(2, c.getCedula());
-            ps.setString(3, c.getNombres());
-            ps.setString(4, c.getApellidos());
-            ps.setString(5, c.getTelefono());
-            ps.setString(6, c.getDireccion());
-            ps.setString(7, c.getEmail());
+            //ID DEL CLIENTE
+            ps.setInt(1, 1);
+            //NUMERO DE CEDULA DEL CLIENTE
+            ps.setString(2, "0954310736");
+            //NOMBRES DEL CLIENTE
+            ps.setString(3, "Maximiliano");
+            //APELLIDOS DEL CLIENTE
+            ps.setString(4, "Cabrera ");
+            //NUMERO DE TELEFONO DEL CLIENTE
+            ps.setString(5, "0962712966");
+            //DIRECCION DEL DOMICILIO DEL CLIENTE
+            ps.setString(6, "Guayaquil");
+            //EMAIL DEL CLIENTE
+            ps.setString(7, "maximilianocabrera885@gmail.com");
             //Envia la sentencia de Actualizar
             ps.executeUpdate();
             con.close();
@@ -100,15 +116,18 @@ public class ConsultasClienteTest {
 
     @Test
     public void testEliminar() {
-        int idC=Integer.parseInt(id);
+        //ESTABLECE LA CONEXION A LA BASE DE DATOS
         CallableStatement ps = null;
         Connection con = getConnection();
         
+        //SENTENCIA SQL
         String sql = "{CALL ELIMINAR_CLIENTE(?)}";
 
         try {
             ps = con.prepareCall(sql);
-            ps.setInt(1, idC);
+            
+            //SE PASA EL ID_CLIENTE PARA PROCEDER A LA ELIMINACION DEL REGISTRO 
+            ps.setInt(1, 1);
             ps.execute();
             con.close();
         } catch (Exception e) {

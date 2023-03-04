@@ -17,7 +17,6 @@ import static org.junit.Assert.*;
  */
 public class ConexionTest {
     Connection conn;
-    String url,login,password;
     public ConexionTest() {
         
     }
@@ -25,7 +24,8 @@ public class ConexionTest {
     @Test
     public void testGetConnection() throws SQLException{
         try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");//Driver jdbc para establecer la conexion
+            //Driver jdbc para establecer la conexion
+            Class.forName("oracle.jdbc.driver.OracleDriver");
             conn = DriverManager.getConnection("jdbc:oracle:thin:@//localhost:1522/XE","Proyecto","proyecto");
             conn.setAutoCommit(false);
             
@@ -48,12 +48,6 @@ public class ConexionTest {
         }
     }
 
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        Conexion.main(args);
-        fail("The test case is a prototype.");
-    }
+    
     
 }

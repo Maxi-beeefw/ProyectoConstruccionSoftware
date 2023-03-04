@@ -26,18 +26,25 @@ public class ConsultasHotelTest {
 
     @Test
     public void testRegistrar() {
+        //ESTABLECE LA CONEXION A LA BASE DE DATOS
         CallableStatement ps = null;
         Connection con = getConnection();
-
+        
+        //SETENCIA SQL
         String sql = "{CALL REGISTRAR_HOTEL(INCREMENTADOIDHOTEL.NEXTVAL,?,?,?,?,?)}";//Insertando datos en la tabla HOTEL
 
         try {
             ps = (CallableStatement) con.prepareCall(sql);
-            ps.setString(1, h.getNombre());
-            ps.setString(2, h.getUbicacion());
-            ps.setString(3, h.getTelefono());
-            ps.setString(4, h.getDisponibilidad());
-            ps.setString(5, h.getServicios());
+            //NOMBRE DEL HOTEL
+            ps.setString(1, "Boston Hotel");
+            //DIRECCION DEL HOTEL
+            ps.setString(2, "Padre Vicente Solano Vargas, Guayaquil 090312");
+            //TELEFONO DEL HOTEL
+            ps.setString(3, "04230-8015");
+            //DISPONIBILIDAD DEL HOTEL
+            ps.setString(4, "si");
+            //SERVICIOS DEL HOTEL
+            ps.setString(5, "Estacionamiento, WIFI, Desayuno");
             ps.execute();
 
         } catch (SQLException e) {
@@ -53,20 +60,28 @@ public class ConsultasHotelTest {
 
     @Test
     public void testModificar() {
-       CallableStatement ps = null;
+        //ESTABLECE LA CONEXION A LA BASE DE DATOS
+        CallableStatement ps = null;
         Connection con = getConnection();
-
+        
+        //SENTENCIA SQL
         String sql = "{CALL ACTUALIZAR_HOTEL(?,?,?,?,?,?)}";
    
         try {
             
             ps = con.prepareCall(sql);
-            ps.setInt(1, h.getIdHotel());
-            ps.setString(2, h.getNombre());
-            ps.setString(3, h.getUbicacion());
-            ps.setString(4, h.getTelefono());
-            ps.setString(5, h.getDisponibilidad());
-            ps.setString(6, h.getServicios());
+            //ID DEL HOTEL
+            ps.setInt(1, 1);
+            //NOMBRE DEL HOTEL
+            ps.setString(2, "Boston Hotel");
+            //DIRECCION DEL HOTEL
+            ps.setString(3, "Padre Vicente Solano Vargas, Guayaquil 090312");
+            //TELEFONO DEL HOTEL
+            ps.setString(4, "04230-8015");
+            //DISPONIBILIDAD DEL HOTEL
+            ps.setString(5, "No");
+            //SERVICIOS DEL HOTEL
+            ps.setString(6, "Estacionamiento, WIFI, Desayuno, Jacuzzi");
             //Envia la sentencia de Actualizar
             ps.executeUpdate();
             con.close();
@@ -97,15 +112,18 @@ public class ConsultasHotelTest {
 
     @Test
     public void testEliminar() {
-        int idH=Integer.parseInt(id);
+        //ESTABLECE LA CONEXION A LA BASE DE DATOS
         CallableStatement ps = null;
         Connection con = getConnection();
-
+        
+        //SENTENCIA SQL
         String sql = "{CALL ELIMINAR_HOTEL(?)}";
 
         try {
             ps = con.prepareCall(sql);
-             ps.setInt(1, idH);
+            
+           //SE PASA EL ID_HOTEL PARA PROCEDER A LA ELIMINACION DEL REGISTRO 
+            ps.setInt(1, 1);
             
             
             ps.execute();

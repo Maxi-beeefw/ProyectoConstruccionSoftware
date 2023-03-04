@@ -26,18 +26,25 @@ public class ConsultasVueloTest {
 
     @Test
     public void testRegistrar() {
+        //ESTABLECE LA CONEXION A LA BASE DE DATOS
         CallableStatement ps = null;
         Connection con = getConnection();
-
+        
+        //SETENCIA SQL
         String sql = "{CALL REGISTRAR_VUELO(INCREMENTADOIDVUELO.NEXTVAL,?,?,?,?,?)}";//Insertando datos en la tabla VUELO
 
         try {
             ps = (CallableStatement) con.prepareCall(sql);
-            ps.setString(1, v.getNombreAerolinea());
-            ps.setString(2, v.getOrigen());
-            ps.setString(3, v.getDestino());
-            ps.setString(4, v.getEscala());
-            ps.setString(5, v.getDisponibilidad());
+            //NOMBRE DE LA AEROLINEA
+            ps.setString(1, "Airlines");
+            //ORIGEN DEL VUELO
+            ps.setString(2, "Guayaquil");
+            //DESTINO DEL VUELO
+            ps.setString(3, "Miami");
+            //ESCALA DEL VUELO
+            ps.setString(4, "Panama");
+            //DISPONIBILIDAD DEL VUELO
+            ps.setString(5, "si");
             ps.execute();
 
         } catch (SQLException e) {
@@ -53,20 +60,28 @@ public class ConsultasVueloTest {
 
     @Test
     public void testModificar() {
+        //ESTABLECE LA CONEXION A LA BASE DE DATOS
          CallableStatement ps = null;
         Connection con = getConnection();
-
+        
+        //SETENCIA SQL
         String sql = "{CALL ACTUALIZAR_VUELO(?,?,?,?,?,?)}";
    
         try {
             
             ps = con.prepareCall(sql);
-            ps.setInt(1, v.getIdVuelo());
-            ps.setString(2, v.getNombreAerolinea());
-            ps.setString(3, v.getOrigen());
-            ps.setString(4, v.getDestino());
-            ps.setString(5, v.getEscala());
-            ps.setString(6, v.getDisponibilidad());
+            //ID DEL VUELO
+            ps.setInt(1, 1);
+            //NOMBRE DE LA AEROLINEA DEL VUELO
+            ps.setString(2, "Airlines");
+            //ORIGEN DEL VUELO
+            ps.setString(3, "Guayaquil");
+            //DESTINO DEL VUELO
+            ps.setString(4, "Miami");
+            //ESCALA DEL VUELO
+            ps.setString(5, "Ninguna");
+            //DISPONIBILIDAD DEL VUELO
+            ps.setString(6, "No");
             //Envia la sentencia de Actualizar
             ps.executeUpdate();
             con.close();
@@ -97,15 +112,18 @@ public class ConsultasVueloTest {
 
     @Test
     public void testEliminar() {
-        int idH=Integer.parseInt(id);
+        //ESTABLECE LA CONEXION A LA BASE DE DATOS
         CallableStatement ps = null;
         Connection con = getConnection();
-
+        
+        //SENTENCIA SQL
         String sql = "{CALL ELIMINAR_VUELO(?)}";
 
         try {
             ps = con.prepareCall(sql);
-            ps.setInt(1, idH);
+            
+            //SE PASA EL ID_VUELO PARA PROCEDER A LA ELIMINACION DEL REGISTRO 
+            ps.setInt(1, 1);
             ps.execute();
             con.close();
         } catch (Exception e) {
