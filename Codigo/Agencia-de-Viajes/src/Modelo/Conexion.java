@@ -14,7 +14,7 @@ public class Conexion
     private static Connection conn =null;
     private static String login = "Proyecto";//Usuario de la Base de Datos
     private static String password = "proyecto";//Contraseña de la Base de Datos
-    private static String url = "jdbc:oracle:thin:@//localhost:1522/XE";//url conexion a la base de Datos llamada "Proyecto"
+    private static String url = "jdbc:oracle:thin:@//localhost:1521/orcl";//url conexion a la base de Datos llamada "Proyecto"
     //jdbc:oracle:thin:@//localhost:1522/XE
     public static Connection getConnection(){
         

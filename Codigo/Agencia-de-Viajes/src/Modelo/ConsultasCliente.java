@@ -1,24 +1,24 @@
 package Modelo;
 
-import Controlador.CtrlCliente;
-import Vista.*;
-import Modelo.*;
+import Controlador.Render;
+import Vista.frmCliente;
 import java.sql.*;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Grupo E
  */
 public class ConsultasCliente extends Conexion {
-    
+
     //METODO REGISTRAR CLIENTE
     public boolean registrar(Cliente c) {
 
         CallableStatement ps = null;
         Connection con = getConnection();
-        
 
         String sql = "{CALL REGISTRAR_CLIENTE(INCREMENTADOIDCLIENTE.NEXTVAL,?,?,?,?,?,?)}";//Insertando datos en la tabla CLIENTE
 
@@ -45,17 +45,17 @@ public class ConsultasCliente extends Conexion {
             }
         }
     }
-    
+
     //METODO MODIFICAR CLIENTE
-     public boolean modificar(Cliente c) {
+    public boolean modificar(Cliente c) {
 
         CallableStatement ps = null;
         Connection con = getConnection();
 
         String sql = "{CALL ACTUALIZAR_CLIENTE(?,?,?,?,?,?,?)}";
-   
+
         try {
-            
+
             ps = con.prepareCall(sql);
             ps.setInt(1, c.getIdCliente());
             ps.setString(2, c.getCedula());
@@ -81,28 +81,27 @@ public class ConsultasCliente extends Conexion {
             }
         }
     }
-       
-    
+
     //METODO LISTAR CLIENTES
-    public static ResultSet ListarTabla(String consulta){
+    public static ResultSet ListarTabla(String consulta) {
         Statement sql;
-        ResultSet rs=null;
+        ResultSet rs = null;
         Connection con = getConnection();
         try {
-            sql=con.createStatement();
-            rs=sql.executeQuery(consulta);
+            sql = con.createStatement();
+            rs = sql.executeQuery(consulta);
         } catch (Exception e) {
             System.out.println(e);
         }
         return rs;
     }
-    
-     //METODO ELIMINAR CLIENTE
+
+    //METODO ELIMINAR CLIENTE
     public static boolean Eliminar(String id) {
-        int idC=Integer.parseInt(id);
+        int idC = Integer.parseInt(id);
         CallableStatement ps = null;
         Connection con = getConnection();
-        
+
         String sql = "{CALL ELIMINAR_CLIENTE(?)}";
 
         try {
@@ -113,9 +112,10 @@ public class ConsultasCliente extends Conexion {
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            
+
             return false;
-       
+
         }
     }
+
 }

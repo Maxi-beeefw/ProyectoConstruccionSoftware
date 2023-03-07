@@ -2,9 +2,7 @@
 package Main;
 
 
-import Modelo.Cliente;
-import Modelo.ConsultasCliente;
-import Vista.MenuPrincipal;
+import Vista.*;
 
 /**
  *
@@ -13,9 +11,7 @@ import Vista.MenuPrincipal;
 public class Main {
 
     public static void main(String[] args) {
-        Cliente mod = new Cliente();
-        ConsultasCliente modC =new ConsultasCliente();
-        MenuPrincipal inicio= new MenuPrincipal();
-        inicio.setVisible(true);
+        FrmLogin frml = new FrmLogin();
+        frml.setVisible(true);
     }
 }

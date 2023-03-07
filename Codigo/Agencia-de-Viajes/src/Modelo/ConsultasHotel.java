@@ -1,8 +1,12 @@
 package Modelo;
 
+import Controlador.Render;
+import Vista.frmHotel;
 import java.sql.*;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import javax.swing.JButton;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -115,4 +119,6 @@ public class ConsultasHotel extends Conexion {
        
         }
     }
+    
+   
 }

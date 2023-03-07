@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Controlador;
 
 import java.awt.Component;
@@ -22,6 +19,6 @@ public class Render extends DefaultTableCellRenderer{
             JButton btn= (JButton)value;
             return btn;
         }
-        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+        return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column); //permite  agg botones a la tabla
     }
 }

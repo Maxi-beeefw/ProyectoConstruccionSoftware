@@ -2,8 +2,9 @@ package Vista;
 
 import Controlador.*;
 import Controlador.Render;
-import static Modelo.Conexion.getConnection;
 import Modelo.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.*;
@@ -32,40 +33,35 @@ public class frmVuelo extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnback = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblVuelo = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        txtOrigen = new javax.swing.JTextField();
-        txtDestino = new javax.swing.JTextField();
-        txtaerolinea = new javax.swing.JTextField();
-        txtDisponibilidad = new javax.swing.JTextField();
-        txtEscala = new javax.swing.JTextField();
-        btnGuardar = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         txtBusqueda = new javax.swing.JTextField();
         cb_buscar = new javax.swing.JComboBox<>();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtEscala = new javax.swing.JTextField();
+        txtOrigen = new javax.swing.JTextField();
+        txtDestino = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btnback = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtaerolinea = new javax.swing.JComboBox<>();
+        txtDisponibilidad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
 
-        btnback.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        btnback.setText("REGRESAR");
-        btnback.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnbackActionPerformed(evt);
-            }
-        });
-
-        tblVuelo.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        tblVuelo.setBackground(new java.awt.Color(255, 255, 255));
+        tblVuelo.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        tblVuelo.setForeground(new java.awt.Color(0, 0, 0));
         tblVuelo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -81,92 +77,12 @@ public class frmVuelo extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblVuelo);
 
-        jLabel1.setFont(new java.awt.Font("Monospaced", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("MENU VUELOS");
-
-        jPanel3.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Datos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel3.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Aerelinea:");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 70, 20));
-
-        jLabel4.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Origen:");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 50, 20));
-
-        jLabel5.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Destino:");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, 20));
-
-        jLabel6.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Disponibilidad:");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 110, 20));
-
-        jLabel7.setFont(new java.awt.Font("Monospaced", 1, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Escala:");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 60, 50, 20));
-
-        txtOrigen.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtOrigenKeyTyped(evt);
-            }
-        });
-        jPanel3.add(txtOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 30, 250, -1));
-
-        txtDestino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDestinoActionPerformed(evt);
-            }
-        });
-        txtDestino.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDestinoKeyTyped(evt);
-            }
-        });
-        jPanel3.add(txtDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 250, -1));
-
-        txtaerolinea.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtaerolineaKeyTyped(evt);
-            }
-        });
-        jPanel3.add(txtaerolinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 250, -1));
-
-        txtDisponibilidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDisponibilidadKeyTyped(evt);
-            }
-        });
-        jPanel3.add(txtDisponibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 250, -1));
-
-        txtEscala.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtEscalaKeyTyped(evt);
-            }
-        });
-        jPanel3.add(txtEscala, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 250, -1));
-
-        btnGuardar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
-        btnGuardar.setText("REGISTRAR");
-        btnGuardar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 130, 100, 34));
-
         jPanel6.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Busqueda por Cedula", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)), "Busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12), new java.awt.Color(255, 255, 255))); // NOI18N
 
+        txtBusqueda.setBackground(new java.awt.Color(255, 255, 255));
+        txtBusqueda.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        txtBusqueda.setBorder(null);
         txtBusqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtBusquedaActionPerformed(evt);
@@ -181,7 +97,9 @@ public class frmVuelo extends javax.swing.JFrame {
             }
         });
 
-        cb_buscar.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        cb_buscar.setBackground(new java.awt.Color(255, 255, 255));
+        cb_buscar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        cb_buscar.setForeground(new java.awt.Color(0, 0, 0));
         cb_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Aerolinea", "Origen", "Destino" }));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -200,7 +118,7 @@ public class frmVuelo extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cb_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -210,51 +128,128 @@ public class frmVuelo extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnback)
-                        .addGap(401, 401, 401)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(73, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130))
+                .addGap(60, 60, 60)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 698, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(16, 16, 16)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(314, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(384, 0, 710, 640));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel3.setText("Aerolinea:");
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 60, 20));
+
+        jLabel5.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel5.setText("Destino:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 50, 20));
+
+        jLabel6.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel6.setText("Disponibilidad:");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 80, 20));
+
+        jLabel4.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel4.setText("Origen:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 50, 20));
+
+        jLabel7.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel7.setText("Escala:");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 50, 20));
+
+        txtEscala.setBackground(new java.awt.Color(204, 204, 204));
+        txtEscala.setBorder(null);
+        txtEscala.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEscalaKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtEscala, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, 250, 20));
+
+        txtOrigen.setBackground(new java.awt.Color(204, 204, 204));
+        txtOrigen.setBorder(null);
+        txtOrigen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtOrigenKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtOrigen, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 250, 20));
+
+        txtDestino.setBackground(new java.awt.Color(204, 204, 204));
+        txtDestino.setBorder(null);
+        txtDestino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDestinoActionPerformed(evt);
+            }
+        });
+        txtDestino.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDestinoKeyTyped(evt);
+            }
+        });
+        jPanel2.add(txtDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 250, 20));
+
+        btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
+        btnGuardar.setFont(new java.awt.Font("Roboto", 1, 14)); // NOI18N
+        btnGuardar.setForeground(new java.awt.Color(0, 102, 102));
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/anadir.png"))); // NOI18N
+        btnGuardar.setText("REGISTRAR");
+        btnGuardar.setBorder(null);
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 130, 34));
+
+        btnback.setBackground(new java.awt.Color(255, 255, 255));
+        btnback.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        btnback.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/atras.png"))); // NOI18N
+        btnback.setBorder(null);
+        btnback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbackActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnback, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 40, 40));
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setText("VUELOS");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, -1, -1));
+
+        txtaerolinea.setBackground(new java.awt.Color(204, 204, 204));
+        txtaerolinea.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        txtaerolinea.setForeground(new java.awt.Color(0, 0, 0));
+        txtaerolinea.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aeroméxico", "Air Europa", "American Airlines", "Avianca", "Avianca Ecuador Internacional", "Conviasa", "COPA", "Delta Airlines" }));
+        jPanel2.add(txtaerolinea, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, -1, -1));
+
+        txtDisponibilidad.setBackground(new java.awt.Color(204, 204, 204));
+        txtDisponibilidad.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        txtDisponibilidad.setForeground(new java.awt.Color(0, 0, 0));
+        txtDisponibilidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "No" }));
+        jPanel2.add(txtDisponibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, -1, -1));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 640));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -307,12 +302,7 @@ public class frmVuelo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void txtOrigenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtOrigenKeyTyped
-        char c= evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            evt.setKeyChar(Character.toUpperCase(c));
-        }
-        if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
-        if(txtaerolinea.getText().length()>=30) evt.consume();
+                textInput(evt, txtOrigen.getText(), 30);
     }//GEN-LAST:event_txtOrigenKeyTyped
 
     private void txtDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDestinoActionPerformed
@@ -320,40 +310,11 @@ public class frmVuelo extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDestinoActionPerformed
 
     private void txtDestinoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDestinoKeyTyped
-        char c= evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            evt.setKeyChar(Character.toUpperCase(c));
-        }
-        if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
-        if(txtaerolinea.getText().length()>=30) evt.consume();
+        textInput(evt, txtDestino.getText(), 30);
     }//GEN-LAST:event_txtDestinoKeyTyped
 
-    private void txtaerolineaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtaerolineaKeyTyped
-        char c= evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            evt.setKeyChar(Character.toUpperCase(c));
-        }
-        if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
-        if(txtaerolinea.getText().length()>=30) evt.consume();
-    }//GEN-LAST:event_txtaerolineaKeyTyped
-
-    private void txtDisponibilidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDisponibilidadKeyTyped
-        char c= evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            evt.setKeyChar(Character.toUpperCase(c));
-        }
-        String telefono=txtDisponibilidad.getText().trim();
-        if(!Character.isLetter(c) || telefono.length()>=2) evt.consume();
-        if(txtDisponibilidad.getText().length()>=2) evt.consume();
-    }//GEN-LAST:event_txtDisponibilidadKeyTyped
-
     private void txtEscalaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEscalaKeyTyped
-        char c= evt.getKeyChar();
-        if (Character.isLowerCase(c)) {
-            evt.setKeyChar(Character.toUpperCase(c));
-        }
-        if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
-        if(txtaerolinea.getText().length()>=30) evt.consume();
+                textInput(evt, txtEscala.getText(), 30);
     }//GEN-LAST:event_txtEscalaKeyTyped
 
     private void txtBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBusquedaActionPerformed
@@ -363,37 +324,66 @@ public class frmVuelo extends javax.swing.JFrame {
     private void txtBusquedaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyReleased
         BuscarVuelo(txtBusqueda.getText());//llamando al metodo buscar
     }//GEN-LAST:event_txtBusquedaKeyReleased
+  
+    private void vacio(java.awt.event.KeyEvent evt, String txt, int maxLength) {
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || txt.length() > 0 || !Character.isLetter(c)) {
+            evt.consume();
+        }
+    }
+  
+  private void cedulaInput(java.awt.event.KeyEvent evt, String txt, int maxLength) {
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || txt.length() >= 10) {
+            evt.consume();
+        }
+        if (txt.length() >= 10) {
+            evt.consume();
+        }
+    }
 
+    private void textInput(java.awt.event.KeyEvent evt, String txt, int maxLength) {
+        char c = evt.getKeyChar();
+        if (Character.isLowerCase(c)) {
+            evt.setKeyChar(Character.toUpperCase(c));
+        }
+        if (!Character.isLetter(c) && c != KeyEvent.VK_SPACE) {
+            evt.consume();
+        }
+        if (txt.length() >= maxLength) {
+            evt.consume();
+        }
+    }
+    
     private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
-        buscar_box=(String)cb_buscar.getSelectedItem();
-        if (buscar_box.equals("Seleccione")) {
-            txtBusqueda.setEnabled(false);
-        }else if(buscar_box.equals("Aerolinea")){
-            char c= evt.getKeyChar();
-            if (Character.isLowerCase(c)) {
-                evt.setKeyChar(Character.toUpperCase(c));
-            }
-            if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
-            if(txtBusqueda.getText().length()>=50) evt.consume();
-        }else if (buscar_box.equals("Origen")) {
-            char c= evt.getKeyChar();
-            if (Character.isLowerCase(c)) {
-                evt.setKeyChar(Character.toUpperCase(c));
-            }
-//            if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
-            if(txtBusqueda.getText().length()>=60) evt.consume();
-        }
-        else if (buscar_box.equals("Destino")) {
-            char c= evt.getKeyChar();
-            if (Character.isLowerCase(c)) {
-                evt.setKeyChar(Character.toUpperCase(c));
-            }
-//            if(!Character.isLetter(c) && c!=KeyEvent.VK_SPACE) evt.consume();
-            if(txtBusqueda.getText().length()>=60) evt.consume();
+        buscar_box = (String) cb_buscar.getSelectedItem();
+        String txt = txtBusqueda.getText().trim();
+        int maxLength = 80;
+
+        switch (buscar_box) {
+            case "Seleccione" -> vacio(evt, txt, maxLength); // 
+            case "Aerolinea" -> textInput(evt, buscar_box, maxLength);
+            case "Origen" -> textInput(evt, txt, maxLength);
+            case "Destino" -> textInput(evt, txt, maxLength);
+            default -> System.out.println("Error");
         }
 
+        if (txtBusqueda.getText().length() >= maxLength) {
+            evt.consume();
+        }
+
+        // Agregar ActionListener al JComboBox para limpiar el JTextField
+        cb_buscar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Limpiar el contenido del JTextField
+                txtBusqueda.setText("");
+            }
+        });
     }//GEN-LAST:event_txtBusquedaKeyTyped
-    //buscar solo con el txtfield sin usar boton
+    
+
+
+//Buscar solo con el txtfield sin usar boton
    
    public void BuscarVuelo(String buscar) {
         this.tblVuelo.setDefaultRenderer(Object.class, new Render());
@@ -442,15 +432,15 @@ public class frmVuelo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane3;
     public javax.swing.JTable tblVuelo;
     public javax.swing.JTextField txtBusqueda;
     public javax.swing.JTextField txtDestino;
-    public javax.swing.JTextField txtDisponibilidad;
+    public javax.swing.JComboBox<String> txtDisponibilidad;
     public javax.swing.JTextField txtEscala;
     public javax.swing.JTextField txtOrigen;
-    public javax.swing.JTextField txtaerolinea;
+    public javax.swing.JComboBox<String> txtaerolinea;
     // End of variables declaration//GEN-END:variables
 }
